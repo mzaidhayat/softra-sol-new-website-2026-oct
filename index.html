@@ -109,7 +109,7 @@
   <link rel="icon" type="image/png" href="assets/softra-sol-cropped.png">
   
   <!-- Main Stylesheet with Cache Buster -->
-  <link rel="stylesheet" href="style.css?v=20261026_08">
+  <link rel="stylesheet" href="style.css?v=20261026_09">
 
   <style>
     /* ==========================================================================
@@ -1648,11 +1648,14 @@
               <div class="hub-status-header">
                 <div class="hub-status-pill">
                   <span class="hub-status-dot"></span>
-                  <span>Inquiry Prepared &bull; Actionable Hub</span>
+                  <span id="hubStatusText">Inquiry Prepared &bull; Actionable Hub</span>
                 </div>
-                <h3 class="hub-title">Ready to Transmit to Engineering</h3>
-                <p class="hub-desc">We opened your default email client with your project brief pre-formatted. If it did not open automatically, choose an instant action below:</p>
+                <h3 class="hub-title" id="hubTitleText">Ready to Transmit to Engineering</h3>
+                <p class="hub-desc" id="hubDescText">Your project brief is packaged and ready to send to contact@softrasol.com. Choose your preferred transmission method below:</p>
               </div>
+
+              <!-- Live Dispatch Alert Banner -->
+              <div class="hub-dispatch-status" id="hubDispatchStatus" style="display: none;"></div>
 
               <div class="hub-preview-card">
                 <div class="hub-preview-bar">
@@ -1663,10 +1666,17 @@
               </div>
 
               <div class="hub-actions-cluster">
-                <a href="#" class="btn-primary hub-action-btn" id="hubDirectMailtoBtn">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                  <span>Open in Email App</span>
+                <!-- 1. Send via Web Gmail (Direct in browser, no email client required) -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-primary hub-action-btn hub-btn-gmail" id="hubGmailBtn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                  <span>Open in Gmail (Web)</span>
                 </a>
+                <!-- 2. Send via Native Mail App (Apple Mail / Outlook) -->
+                <a href="#" class="btn-secondary hub-action-btn hub-btn-mailapp" id="hubDirectMailtoBtn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  <span>Open in Mail App</span>
+                </a>
+                <!-- 3. Copy Details to Clipboard -->
                 <button type="button" class="btn-secondary hub-copy-btn" id="hubCopyDetailsBtn">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                   <span id="hubCopyDetailsText">Copy Inquiry Spec</span>
@@ -1766,6 +1776,6 @@
 
   <!-- Scripts -->
   <script src="wave.js"></script>
-  <script src="app.js?v=20261026_08"></script>
+  <script src="app.js?v=20261026_09"></script>
 </body>
 </html>

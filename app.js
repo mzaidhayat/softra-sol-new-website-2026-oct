@@ -241,6 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     requestAnimationFrame(renderCursor);
 
+    const heroHeading = document.querySelector('.hero-heading');
     if (heroHeading) {
       heroHeading.addEventListener('mouseenter', () => {
         bubble.classList.add('dissolve-in-text');
@@ -385,10 +386,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const inquiryForm = document.getElementById('projectInquiryForm');
   const inquiryActionHub = document.getElementById('inquiryActionHub');
   const hubPreviewBody = document.getElementById('hubPreviewBody');
+  const hubGmailBtn = document.getElementById('hubGmailBtn');
   const hubDirectMailtoBtn = document.getElementById('hubDirectMailtoBtn');
   const hubCopyDetailsBtn = document.getElementById('hubCopyDetailsBtn');
   const hubCopyDetailsText = document.getElementById('hubCopyDetailsText');
   const hubResetFormBtn = document.getElementById('hubResetFormBtn');
+  const hubDispatchStatus = document.getElementById('hubDispatchStatus');
   const submitInquiryBtn = document.getElementById('submitInquiryBtn');
   const submitBtnText = document.getElementById('submitBtnText');
 
@@ -544,42 +547,76 @@ Dispatched via Softra Sol Engineering Portal`;
 
       lastGeneratedSpec = structuredBody;
       lastMailtoUrl = `mailto:contact@softrasol.com?subject=${encodeURIComponent(formattedSubject)}&body=${encodeURIComponent(structuredBody)}`;
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=contact@softrasol.com&su=${encodeURIComponent(formattedSubject)}&body=${encodeURIComponent(structuredBody)}`;
 
-      setTimeout(() => {
-        // Update Action Hub
-        if (hubPreviewBody) {
-          hubPreviewBody.textContent = structuredBody;
-        }
+      // Update Action Hub UI
+      if (hubPreviewBody) {
+        hubPreviewBody.textContent = structuredBody;
+      }
+      if (hubGmailBtn) {
+        hubGmailBtn.href = gmailUrl;
+      }
+      if (hubDirectMailtoBtn) {
+        hubDirectMailtoBtn.href = lastMailtoUrl;
+      }
 
-        if (hubDirectMailtoBtn) {
-          hubDirectMailtoBtn.href = lastMailtoUrl;
-        }
+      // Smooth switch between form and Action Hub
+      inquiryForm.style.display = 'none';
+      if (inquiryActionHub) {
+        inquiryActionHub.style.display = 'block';
+        inquiryActionHub.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
 
-        // Smooth switch between form and Action Hub
-        inquiryForm.style.display = 'none';
-        if (inquiryActionHub) {
-          inquiryActionHub.style.display = 'block';
-          inquiryActionHub.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
+      if (submitInquiryBtn) {
+        submitInquiryBtn.disabled = false;
+        if (submitBtnText) submitBtnText.textContent = 'Submit Project Request';
+      }
 
-        if (submitInquiryBtn) {
-          submitInquiryBtn.disabled = false;
-          if (submitBtnText) submitBtnText.textContent = 'Submit Project Request';
-        }
+      // Live transmission attempt
+      if (hubDispatchStatus) {
+        hubDispatchStatus.className = 'hub-dispatch-status status-info';
+        hubDispatchStatus.style.display = 'flex';
+        hubDispatchStatus.innerHTML = '<span class="avail-dot" style="margin-right:8px;" aria-hidden="true"></span><span>Transmitting inquiry to contact@softrasol.com...</span>';
+      }
 
-        // Trigger native email client with prefilled spec
-        try {
-          const mailLink = document.createElement('a');
-          mailLink.href = lastMailtoUrl;
-          mailLink.target = '_blank';
-          mailLink.rel = 'noopener noreferrer';
-          document.body.appendChild(mailLink);
-          mailLink.click();
-          document.body.removeChild(mailLink);
-        } catch (err) {
-          console.warn('Native mailto trigger intercepted:', err);
+      // Automatic background serverless dispatch
+      fetch('https://formsubmit.co/ajax/contact@softrasol.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: formattedSubject,
+          client_name: name,
+          work_email: email,
+          company: company || 'Direct Client',
+          service_requested: selectedService,
+          estimated_budget: selectedBudget,
+          project_overview: message,
+          _template: 'table'
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data && (data.success === 'true' || data.success === true)) {
+          if (hubDispatchStatus) {
+            hubDispatchStatus.className = 'hub-dispatch-status status-success';
+            hubDispatchStatus.innerHTML = '<span>✓ Direct Email Transmitted to contact@softrasol.com! Our engineering lead will respond within 2 hours.</span>';
+          }
+        } else {
+          if (hubDispatchStatus) {
+            hubDispatchStatus.className = 'hub-dispatch-status status-info';
+            hubDispatchStatus.innerHTML = '<span>⚡ Project Brief Generated! Choose "Open in Gmail" or "Open in Mail App" below to complete sending in 1 click.</span>';
+          }
         }
-      }, 350);
+      })
+      .catch(() => {
+        if (hubDispatchStatus) {
+          hubDispatchStatus.className = 'hub-dispatch-status status-info';
+          hubDispatchStatus.innerHTML = '<span>⚡ Project Brief Generated! Choose "Open in Gmail" or "Open in Mail App" below to complete sending in 1 click.</span>';
+        }
+      });
     });
   }
 
@@ -619,6 +656,7 @@ Dispatched via Softra Sol Engineering Portal`;
   if (hubResetFormBtn) {
     hubResetFormBtn.addEventListener('click', () => {
       if (inquiryActionHub) inquiryActionHub.style.display = 'none';
+      if (hubDispatchStatus) hubDispatchStatus.style.display = 'none';
       if (inquiryForm) {
         inquiryForm.style.display = 'flex';
         inquiryForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

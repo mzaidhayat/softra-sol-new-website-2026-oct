@@ -2532,9 +2532,33 @@ button {
   color: #E2E8F0 !important;
 }
 
+.hub-dispatch-status {
+  padding: 12px 18px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hub-dispatch-status.status-success {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #10B981;
+}
+
+.hub-dispatch-status.status-info {
+  background: rgba(33, 138, 255, 0.1);
+  border: 1px solid rgba(33, 138, 255, 0.25);
+  color: var(--brand-blue);
+}
+
 .hub-actions-cluster {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-bottom: 18px;
 }
@@ -2544,9 +2568,37 @@ button {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 18px;
-  font-size: 0.9rem;
+  padding: 12px 14px;
+  font-size: 0.86rem;
+  font-weight: 700;
   text-decoration: none;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.hub-btn-gmail {
+  background: #EA4335 !important;
+  border: 1px solid #EA4335 !important;
+  color: #FFFFFF !important;
+}
+
+.hub-btn-gmail:hover {
+  background: #D93025 !important;
+  box-shadow: 0 4px 14px rgba(234, 67, 53, 0.35);
+  transform: translateY(-2px);
+}
+
+.hub-btn-mailapp {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-heading);
+}
+
+.hub-btn-mailapp:hover {
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
+  transform: translateY(-2px);
 }
 
 .hub-copy-btn {
@@ -2554,20 +2606,25 @@ button {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: var(--bg-primary);
+  background: var(--bg-card);
   border: 1px solid var(--border-light);
   color: var(--text-heading);
-  padding: 12px 18px;
+  padding: 12px 14px;
   border-radius: 9999px;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
+[data-theme="dark"] .hub-btn-mailapp,
 [data-theme="dark"] .hub-copy-btn {
   background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
   border-color: rgba(255, 255, 255, 0.15);
   color: #FFFFFF;
 }
