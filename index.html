@@ -443,11 +443,6 @@
         </button>
       </div>
     </div>
-
-    <!-- Top Right Minimalist Decor Plus Icon (Exact Roveia Signature Detail) -->
-    <button class="corner-plus-btn" id="cornerWaveControlBtn" title="Customize Wave Atmosphere" aria-label="Wave Atmosphere Settings">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-    </button>
   </header>
 
   <!-- Mobile Drawer Menu -->
@@ -1357,126 +1352,8 @@
     </div>
   </footer>
 
-  <!-- =========================================================================
-       5. Interactive Floating Customizer Bar & Code Export Modal
-       ========================================================================= -->
-  <aside class="wave-customizer-dock" id="waveCustomizerDock" aria-label="Wave Customizer Panel">
-    <div class="dock-header">
-      <div class="dock-title-wrap">
-        <span class="dock-pulse"></span>
-        <span class="dock-title">Wave Physics & Atmosphere</span>
-      </div>
-      <button class="dock-collapse-btn" id="dockCollapseBtn" aria-label="Toggle Panel" title="Toggle Controls">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-      </button>
-    </div>
-
-    <div class="dock-body" id="dockBody">
-      <!-- Theme Switcher -->
-      <div class="control-row">
-        <label class="control-label">Atmosphere Theme</label>
-        <div class="theme-segmented-ctrl">
-          <button class="seg-btn active" id="segThemeLight" data-theme-val="light">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-            <span>Pure White (Roveia)</span>
-          </button>
-          <button class="seg-btn" id="segThemeDark" data-theme-val="dark">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            <span>Obsidian Dark</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Wave Color Palettes -->
-      <div class="control-row">
-        <label class="control-label">Wave Hue</label>
-        <div class="color-palette-buttons">
-          <button class="color-chip active" data-color="#218AFF" style="--c:#218AFF" title="Roveia Electric Blue (#218AFF)"></button>
-          <button class="color-chip" data-color="#0284C7" style="--c:#0284C7" title="Ocean Azure (#0284C7)"></button>
-          <button class="color-chip" data-color="#6366F1" style="--c:#6366F1" title="Softra Indigo (#6366F1)"></button>
-          <button class="color-chip" data-color="#06B6D4" style="--c:#06B6D4" title="Cyan Aurora (#06B6D4)"></button>
-          <button class="color-chip" data-color="#3B82F6" style="--c:#3B82F6" title="Vibrant Sky (#3B82F6)"></button>
-        </div>
-      </div>
-
-      <!-- Wave Blur Control -->
-      <div class="control-row">
-        <div class="control-label-split">
-          <label for="blurSlider">Gaussian Blur</label>
-          <span class="val-display" id="blurValDisplay">16px</span>
-        </div>
-        <input type="range" id="blurSlider" min="4" max="36" value="16" step="1" class="custom-range">
-      </div>
-
-      <!-- Wave Speed Control -->
-      <div class="control-row">
-        <div class="control-label-split">
-          <label for="speedSlider">Wave Bobbing Speed</label>
-          <span class="val-display" id="speedValDisplay">1.0x</span>
-        </div>
-        <input type="range" id="speedSlider" min="0.2" max="2.5" value="1.0" step="0.1" class="custom-range">
-      </div>
-
-      <!-- Wave Height Control -->
-      <div class="control-row">
-        <div class="control-label-split">
-          <label for="heightSlider">Wave Base Height</label>
-          <span class="val-display" id="heightValDisplay">220px</span>
-        </div>
-        <input type="range" id="heightSlider" min="100" max="420" value="220" step="10" class="custom-range">
-      </div>
-
-      <!-- Wave Fill Opacity Control -->
-      <div class="control-row">
-        <div class="control-label-split">
-          <label for="fillSlider">Top Crest Opacity</label>
-          <span class="val-display" id="fillValDisplay">0.52</span>
-        </div>
-        <input type="range" id="fillSlider" min="0.2" max="0.9" value="0.52" step="0.02" class="custom-range">
-      </div>
-
-      <div class="dock-actions">
-        <button class="btn-dock-action" id="resetWaveBtn">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
-          <span>Reset Roveia Preset</span>
-        </button>
-        <button class="btn-dock-export" id="openExportModalBtn">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-          <span>Get Embed Code</span>
-        </button>
-      </div>
-    </div>
-  </aside>
-
-  <!-- =========================================================================
-       6. Embed Code Modal (100% Drop-In HTML/CSS/JS for User)
-       ========================================================================= -->
-  <div class="modal-backdrop" id="exportModal" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <div>
-          <h3 class="modal-title">Roveia Wave Background — 100% Concept Embed</h3>
-          <p class="modal-sub">Copy this single snippet into your website, Webflow HTML embed, or framework.</p>
-        </div>
-        <button class="modal-close-btn" id="closeExportModalBtn" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="code-box-wrapper">
-          <div class="code-box-header">
-            <span>HTML + CSS + JAVASCRIPT (Self-contained)</span>
-            <button class="btn-copy-code" id="copyCodeBtn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              <span id="copyBtnText">Copy Code</span>
-            </button>
-          </div>
-          <pre class="code-pre"><code id="codeSnippetContent"></code></pre>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Scripts -->
   <script src="wave.js"></script>
-  <script src="app.js?v=20261025_09"></script>
+  <script src="app.js?v=20261026_02"></script>
 </body>
 </html>
