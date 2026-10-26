@@ -358,11 +358,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   const backToTopBtn = document.getElementById('backToTopBtn');
   if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+    backToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      try {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
+      } catch (err) {
+        window.scrollTo(0, 0);
+      }
+      if (document.documentElement) {
+        document.documentElement.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      }
+      if (document.body) {
+        document.body.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      }
     });
   }
 

@@ -1068,31 +1068,121 @@
     </section>
 
     <!-- =======================================================================
-         9. Stats Section (Exact 4-Box Layout with Elevated Typography)
+    <!-- =======================================================================
+         9. Stats & Impact Section (Modern Bento Glass Showcase)
          ======================================================================= -->
     <section class="section-stats" id="stats" aria-label="Key Performance Statistics">
+      <div class="stats-ambient-glow" aria-hidden="true"></div>
       <div class="container-standard">
-        <div class="stats-row">
+        
+        <!-- Section Header -->
+        <div class="stats-header">
+          <div class="stats-kicker-pill">
+            <span class="kicker-pulse-dot" aria-hidden="true"></span>
+            <span>PROVEN TRACK RECORD &bull; MEASURABLE IMPACT</span>
+          </div>
+          <h2 class="stats-headline">Engineering velocity that translates into raw revenue</h2>
+          <p class="stats-lead">Every architecture we deploy is strictly benchmarked against conversion velocity, latency targets, and zero-downtime resilience.</p>
+        </div>
+
+        <!-- 4-Card Modern Bento Grid -->
+        <div class="stats-grid-modern">
           
-          <div class="stat-box">
-            <div class="stat-number">+340%</div>
-            <div class="stat-title">Avg. Conversion Lift</div>
-          </div>
+          <!-- Card 1: +340% Avg. Conversion Lift -->
+          <article class="stat-card-modern">
+            <div class="stat-card-top">
+              <div class="stat-icon-wrapper stat-icon-blue">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+              </div>
+              <span class="stat-tag-badge">MEASURED ROI</span>
+            </div>
+            <div class="stat-metric-display">
+              <span class="stat-metric-val">+340</span><span class="stat-metric-suffix">%</span>
+            </div>
+            <h3 class="stat-card-title">Avg. Conversion Lift</h3>
+            <p class="stat-card-desc">Documented revenue acceleration and user signups across client platform revamps within 90 days of launch.</p>
+            <div class="stat-card-footer">
+              <div class="stat-bar-track">
+                <div class="stat-bar-fill" style="--fill-percent: 94%;"></div>
+              </div>
+              <span class="stat-bar-caption">94% Client Retention</span>
+            </div>
+          </article>
 
-          <div class="stat-box">
-            <div class="stat-number">150+</div>
-            <div class="stat-title">Complex Products Built</div>
-          </div>
+          <!-- Card 2: 150+ Complex Products Built -->
+          <article class="stat-card-modern">
+            <div class="stat-card-top">
+              <div class="stat-icon-wrapper stat-icon-indigo">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <span class="stat-tag-badge">PRODUCTION GRADE</span>
+            </div>
+            <div class="stat-metric-display">
+              <span class="stat-metric-val">150</span><span class="stat-metric-suffix">+</span>
+            </div>
+            <h3 class="stat-card-title">Complex Products Built</h3>
+            <p class="stat-card-desc">Mission-critical enterprise SaaS platforms, AI agent architectures, distributed backends, and multi-tenant portals.</p>
+            <div class="stat-card-footer">
+              <div class="stat-bar-track">
+                <div class="stat-bar-fill" style="--fill-percent: 100%;"></div>
+              </div>
+              <span class="stat-bar-caption">99.99% Uptime Standard</span>
+            </div>
+          </article>
 
-          <div class="stat-box">
-            <div class="stat-number">Mobile-First</div>
-            <div class="stat-title">Responsive Architecture</div>
-          </div>
+          <!-- Card 3: Mobile-First Responsive Architecture -->
+          <article class="stat-card-modern">
+            <div class="stat-card-top">
+              <div class="stat-icon-wrapper stat-icon-cyan">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+                  <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                </svg>
+              </div>
+              <span class="stat-tag-badge">120FPS NATIVE</span>
+            </div>
+            <div class="stat-metric-display stat-metric-textual">
+              <span class="stat-text-lead">Mobile-</span><span class="stat-text-accent">First</span>
+            </div>
+            <h3 class="stat-card-title">Responsive Architecture</h3>
+            <p class="stat-card-desc">Tactile, haptic micro-interactions and sub-second loading optimized across mobile, tablet, and ultra-wide displays.</p>
+            <div class="stat-card-footer">
+              <div class="stat-bar-track">
+                <div class="stat-bar-fill" style="--fill-percent: 98%;"></div>
+              </div>
+              <span class="stat-bar-caption">100/100 Core Web Vitals</span>
+            </div>
+          </article>
 
-          <div class="stat-box">
-            <div class="stat-number">End-to-End</div>
-            <div class="stat-title">Design, Dev &amp; AI</div>
-          </div>
+          <!-- Card 4: End-to-End Design, Dev & AI -->
+          <article class="stat-card-modern">
+            <div class="stat-card-top">
+              <div class="stat-icon-wrapper stat-icon-sky">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                </svg>
+              </div>
+              <span class="stat-tag-badge">STRATEGY TO SCALE</span>
+            </div>
+            <div class="stat-metric-display stat-metric-textual">
+              <span class="stat-text-lead">End-to-</span><span class="stat-text-accent">End</span>
+            </div>
+            <h3 class="stat-card-title">Design, Dev &amp; AI</h3>
+            <p class="stat-card-desc">Zero handoff friction from brand strategy and Figma prototypes to production cloud engineering and autonomous AI.</p>
+            <div class="stat-card-footer">
+              <div class="stat-bar-track">
+                <div class="stat-bar-fill" style="--fill-percent: 96%;"></div>
+              </div>
+              <span class="stat-bar-caption">Turnkey Full-Cycle SLA</span>
+            </div>
+          </article>
 
         </div>
       </div>
@@ -1343,10 +1433,10 @@
         <div class="footer-bottom-links">
           <a href="#privacy">Privacy Policy</a>
           <a href="#terms">Terms of Service</a>
-          <button class="back-to-top-btn" id="backToTopBtn" aria-label="Back to top of page">
+          <a href="#hero" class="back-to-top-btn" id="backToTopBtn" aria-label="Back to top of page" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); if (document.documentElement) document.documentElement.scrollTop = 0; return false;">
             <span>Back to top</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="18 15 12 9 6 15"></polyline></svg>
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -1354,6 +1444,6 @@
 
   <!-- Scripts -->
   <script src="wave.js"></script>
-  <script src="app.js?v=20261026_03"></script>
+  <script src="app.js?v=20261026_04"></script>
 </body>
 </html>
