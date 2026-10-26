@@ -109,102 +109,9 @@
   <link rel="icon" type="image/png" href="assets/softra-sol-cropped.png">
   
   <!-- Main Stylesheet with Cache Buster -->
-  <link rel="stylesheet" href="style.css?v=20261026_01">
+  <link rel="stylesheet" href="style.css?v=20261026_08">
 
   <style>
-    /* ==========================================================================
-       Stats Section (Reverted Clean 4-Column Layout with Elevated Typography)
-       ========================================================================== */
-    .section-stats {
-      position: relative;
-      z-index: 3;
-      padding: 90px 24px 110px;
-      background-color: var(--bg-surface, #F8FAFC);
-      border-top: 1px solid var(--border-light, rgba(0, 0, 0, 0.06));
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .stat-box {
-      background: var(--bg-card, #FFFFFF);
-      border: 1px solid var(--border-light, rgba(0, 0, 0, 0.08));
-      border-radius: 20px;
-      padding: 44px 24px;
-      text-align: center;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                  border-color 0.25s ease, 
-                  box-shadow 0.25s ease;
-    }
-
-    [data-theme="dark"] .stat-box {
-      background: rgba(15, 23, 42, 0.7);
-      border-color: rgba(255, 255, 255, 0.1);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-    }
-
-    .stat-box:hover {
-      transform: translateY(-4px);
-      border-color: rgba(33, 138, 255, 0.4);
-      box-shadow: 0 16px 36px -4px rgba(33, 138, 255, 0.12);
-    }
-
-    /* Elevated Typography for Stat Numbers */
-    .stat-number {
-      font-family: 'Plus Jakarta Sans', 'Manrope', -apple-system, sans-serif;
-      font-size: clamp(2.3rem, 3.2vw, 3.1rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.08;
-      color: var(--text-heading, #0F172A);
-      background: linear-gradient(180deg, var(--text-heading, #0F172A) 30%, #218AFF 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
-    }
-
-    [data-theme="dark"] .stat-number {
-      background: linear-gradient(180deg, #FFFFFF 30%, #38BDF8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* Clean, Refined Typography for Stat Titles */
-    .stat-title {
-      font-family: 'Manrope', -apple-system, sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-muted, #64748B);
-      letter-spacing: -0.012em;
-      line-height: 1.45;
-    }
-
-    @media (max-width: 992px) {
-      .stats-row {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-    }
-
-    @media (max-width: 580px) {
-      .section-stats {
-        padding: 60px 18px 80px;
-      }
-      .stats-row {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .stat-box {
-        padding: 32px 20px;
-      }
-    }
-
     /* ==========================================================================
        Emotion Agency Style Editorial Headline (Single Targeted Text Wave)
        ========================================================================== */
@@ -651,204 +558,270 @@
     </section>
 
     <!-- =======================================================================
-         5. Selected Works / Flagship Case Studies Showcase
+         5. Selected Works / Cinematic Horizontal Scroll Showcase
          ======================================================================= -->
-    <section class="section-work" id="work">
+    <section class="section-work-cinematic" id="work" aria-label="Selected Client Works">
       <div class="container-standard">
-        <div class="section-header-compact">
-          <span class="section-kicker">Featured Case Studies &bull; Proven Impact</span>
-          <h2 class="section-title">Engineered for scale. Built to win.</h2>
-          <p class="section-desc">Explore how we architect category-defining digital platforms, modern high conversion applications, and enterprise AI engines.</p>
+        
+        <!-- Header with Controls & Live Counter -->
+        <div class="work-header-row">
+          <div class="work-header-main">
+            <div class="work-kicker-pill">
+              <span class="work-kicker-dot" aria-hidden="true"></span>
+              <span>FEATURED CASE STUDIES &bull; SELECTED WORKS</span>
+            </div>
+            <h2 class="work-heading-cinematic">Engineered for scale. Built to win.</h2>
+            <p class="work-subheading-cinematic">Explore our flagship digital architectures, high conversion web systems, and autonomous enterprise AI engines.</p>
+          </div>
+
+          <!-- Carousel Controls & Status Counter -->
+          <div class="work-controls-wrap">
+            <div class="work-counter-pill" aria-label="Project Counter">
+              <span class="work-count-active" id="workCounterActive">01</span>
+              <span class="work-count-sep">/</span>
+              <span class="work-count-total">04</span>
+            </div>
+            <div class="work-nav-arrows">
+              <button class="work-nav-btn" id="workPrevBtn" aria-label="Previous Case Study" title="Previous Project">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button class="work-nav-btn" id="workNextBtn" aria-label="Next Case Study" title="Next Project">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <!-- Interactive Category Filter Tabs -->
+        <!-- Filter Bar -->
         <div class="work-filter-bar" role="tablist" aria-label="Project Categories">
-          <button class="work-filter-btn active" data-filter="all" role="tab" aria-selected="true">All Projects</button>
+          <button class="work-filter-btn active" data-filter="all" role="tab" aria-selected="true">All Works</button>
           <button class="work-filter-btn" data-filter="ai-saas" role="tab" aria-selected="false">AI &amp; Enterprise SaaS</button>
-          <button class="work-filter-btn" data-filter="fintech" role="tab" aria-selected="false">FinTech &amp; Web Platforms</button>
+          <button class="work-filter-btn" data-filter="fintech" role="tab" aria-selected="false">FinTech &amp; Systems</button>
           <button class="work-filter-btn" data-filter="ecommerce" role="tab" aria-selected="false">eCommerce &amp; Brands</button>
           <button class="work-filter-btn" data-filter="cloud" role="tab" aria-selected="false">Cloud &amp; DevOps</button>
         </div>
 
-        <!-- Project Grid -->
-        <div class="work-grid" id="workGrid">
+      </div>
+
+      <!-- Horizontal Scroll Track Runway -->
+      <div class="work-runway-container">
+        <div class="work-runway-track" id="workRunwayTrack">
           
-          <!-- Project 1: Aura Health AI -->
-          <article class="work-card" data-category="ai-saas">
-            <div class="work-card-media">
-              <img src="assets/aura-health.jpg" alt="Aura Health AI Diagnostics Platform UI interface" class="work-card-img" loading="lazy" width="800" height="450">
-              <div class="work-card-overlay">
-                <span class="work-status-badge">Live Enterprise Deployment</span>
+          <!-- Card 1: Aura Health AI -->
+          <article class="work-runway-card" data-category="ai-saas" data-index="1">
+            <div class="work-card-media-wrap">
+              <img src="assets/aura-health.jpg" alt="Aura Health AI Diagnostics Platform UI interface" class="work-runway-img" loading="lazy" width="800" height="450">
+              <div class="work-media-glow"></div>
+              <div class="work-media-badge-top">
+                <span class="pulse-emerald"></span>
+                <span>Live Enterprise Deployment</span>
+              </div>
+              <div class="work-media-metric-pill">
+                <span class="metric-num">+312%</span>
+                <span class="metric-txt">Patient Lift</span>
               </div>
             </div>
-            <div class="work-card-content">
-              <div class="work-card-meta">
-                <span class="work-category">HealthTech &bull; AI Diagnostics</span>
-                <div class="work-metrics-badge">
-                  <span class="metric-val">+312%</span>
-                  <span class="metric-label">Patient Engagement</span>
-                </div>
+            <div class="work-card-details">
+              <div class="work-details-top">
+                <span class="work-domain-tag">HealthTech &bull; AI Diagnostics</span>
+                <span class="work-index-tag">01</span>
               </div>
-              <h3 class="work-title">Aura Health &mdash; Clinical AI Diagnostics &amp; Telehealth Suite</h3>
-              <p class="work-desc">Architected an end-to-end clinical AI diagnostics platform featuring real-time biometric neural processing, secure encrypted telehealth sessions, and automated clinician workflows.</p>
+              <h3 class="work-card-title">Aura Health &mdash; Clinical AI Diagnostics &amp; Telehealth Suite</h3>
+              <p class="work-card-excerpt">End-to-end clinical AI diagnostics platform featuring real-time biometric neural processing, HIPAA-compliant encrypted video consults, and automated clinician triage.</p>
               
-              <div class="work-specs-row">
-                <div class="work-spec-item">
-                  <span class="spec-label">Precision</span>
-                  <span class="spec-val">99.8%</span>
+              <div class="work-specs-strip">
+                <div class="spec-cell">
+                  <span class="spec-k">Precision</span>
+                  <span class="spec-v">99.8%</span>
                 </div>
-                <div class="work-spec-item">
-                  <span class="spec-label">Edge Latency</span>
-                  <span class="spec-val">42ms</span>
+                <div class="spec-cell">
+                  <span class="spec-k">Latency</span>
+                  <span class="spec-v">42ms</span>
                 </div>
-                <div class="work-spec-item">
-                  <span class="spec-label">Compliance</span>
-                  <span class="spec-val">HIPAA Grade</span>
+                <div class="spec-cell">
+                  <span class="spec-k">Security</span>
+                  <span class="spec-v">HIPAA Grade</span>
                 </div>
               </div>
 
-              <div class="work-tags">
-                <span>Next.js 15</span>
-                <span>Python / FastAPI</span>
-                <span>Claude 3.5 Sonnet</span>
-                <span>WebSockets</span>
-                <span>PostgreSQL</span>
+              <div class="work-card-bottom-row">
+                <div class="work-tech-pills">
+                  <span>Next.js 15</span>
+                  <span>FastAPI</span>
+                  <span>Claude 3.5</span>
+                  <span>PostgreSQL</span>
+                </div>
+                <a href="#contact" class="work-case-link" aria-label="Explore Aura Health Case Study">
+                  <span>Explore Architecture</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 2: Veloce FinTech Core -->
-          <article class="work-card" data-category="fintech">
-            <div class="work-card-media">
-              <img src="assets/veloce-fintech.jpg" alt="Veloce FinTech Core Trading & Banking Platform UI" class="work-card-img" loading="lazy" width="800" height="450">
-              <div class="work-card-overlay">
-                <span class="work-status-badge">Institutional Scale</span>
+          <!-- Card 2: Veloce FinTech Core -->
+          <article class="work-runway-card" data-category="fintech" data-index="2">
+            <div class="work-card-media-wrap">
+              <img src="assets/veloce-fintech.jpg" alt="Veloce FinTech Platform UI" class="work-runway-img" loading="lazy" width="800" height="450">
+              <div class="work-media-glow"></div>
+              <div class="work-media-badge-top">
+                <span class="pulse-emerald"></span>
+                <span>Institutional Scale</span>
+              </div>
+              <div class="work-media-metric-pill">
+                <span class="metric-num">$4.2B+</span>
+                <span class="metric-txt">Processed</span>
               </div>
             </div>
-            <div class="work-card-content">
-              <div class="work-card-meta">
-                <span class="work-category">FinTech &bull; Core Infrastructure</span>
-                <div class="work-metrics-badge">
-                  <span class="metric-val">$4.2B+</span>
-                  <span class="metric-label">Volume Processed</span>
-                </div>
+            <div class="work-card-details">
+              <div class="work-details-top">
+                <span class="work-domain-tag">FinTech &bull; Core Infrastructure</span>
+                <span class="work-index-tag">02</span>
               </div>
-              <h3 class="work-title">Veloce Core &mdash; Ultra-Low Latency Cross-Border Banking</h3>
-              <p class="work-desc">Engineered high-frequency settlement microservices, tactile mobile banking applications, and institutional crypto/fiat trading terminals with sub-10ms execution times.</p>
+              <h3 class="work-card-title">Veloce Core &mdash; Low-Latency Cross-Border Banking Engine</h3>
+              <p class="work-card-excerpt">High-frequency distributed settlement microservices, tactile mobile banking interface, and institutional fiat-crypto trading rails with sub-10ms execution times.</p>
               
-              <div class="work-specs-row">
-                <div class="work-spec-item">
-                  <span class="spec-label">Execution</span>
-                  <span class="spec-val">&lt; 10ms</span>
+              <div class="work-specs-strip">
+                <div class="spec-cell">
+                  <span class="spec-k">Execution</span>
+                  <span class="spec-v">&lt; 10ms</span>
                 </div>
-                <div class="work-spec-item">
-                  <span class="spec-label">Availability</span>
-                  <span class="spec-val">99.999%</span>
+                <div class="spec-cell">
+                  <span class="spec-k">Uptime</span>
+                  <span class="spec-v">99.999%</span>
                 </div>
-                <div class="work-spec-item">
-                  <span class="spec-label">Architecture</span>
-                  <span class="spec-val">Distributed Go</span>
+                <div class="spec-cell">
+                  <span class="spec-k">Engine</span>
+                  <span class="spec-v">Go Clusters</span>
                 </div>
               </div>
 
-              <div class="work-tags">
-                <span>React Native</span>
-                <span>Go Microservices</span>
-                <span>PostgreSQL</span>
-                <span>Redis Cluster</span>
-                <span>Kubernetes</span>
+              <div class="work-card-bottom-row">
+                <div class="work-tech-pills">
+                  <span>React Native</span>
+                  <span>Golang</span>
+                  <span>Redis</span>
+                  <span>Kubernetes</span>
+                </div>
+                <a href="#contact" class="work-case-link" aria-label="Explore Veloce Core Case Study">
+                  <span>Explore Architecture</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 3: Apex Luxury Commerce -->
-          <article class="work-card" data-category="ecommerce">
-            <div class="work-card-media">
-              <img src="assets/apex-commerce.jpg" alt="Apex Luxury Commerce & Amazon Brand Store UI" class="work-card-img" loading="lazy" width="800" height="450">
-              <div class="work-card-overlay">
-                <span class="work-status-badge">Global Omnichannel</span>
+          <!-- Card 3: Apex Luxury Commerce -->
+          <article class="work-runway-card" data-category="ecommerce" data-index="3">
+            <div class="work-card-media-wrap">
+              <img src="assets/apex-commerce.jpg" alt="Apex Luxury Commerce Store UI" class="work-runway-img" loading="lazy" width="800" height="450">
+              <div class="work-media-glow"></div>
+              <div class="work-media-badge-top">
+                <span class="pulse-emerald"></span>
+                <span>Global Omnichannel</span>
+              </div>
+              <div class="work-media-metric-pill">
+                <span class="metric-num">4.4x</span>
+                <span class="metric-txt">GMV Surge</span>
               </div>
             </div>
-            <div class="work-card-content">
-              <div class="work-card-meta">
-                <span class="work-category">eCommerce &bull; Amazon Scale</span>
-                <div class="work-metrics-badge">
-                  <span class="metric-val">4.4x</span>
-                  <span class="metric-label">GMV Surge</span>
-                </div>
+            <div class="work-card-details">
+              <div class="work-details-top">
+                <span class="work-domain-tag">eCommerce &bull; Amazon Scale</span>
+                <span class="work-index-tag">03</span>
               </div>
-              <h3 class="work-title">Apex Audio &mdash; 3D Luxury Storefront &amp; Amazon Brand Suite</h3>
-              <p class="work-desc">Designed a Scandinavian minimalist flagship eCommerce experience with real-time 3D audio configuration, alongside high conversion Amazon Brand Store and premium A+ listing designs.</p>
+              <h3 class="work-card-title">Apex Audio &mdash; 3D Luxury Storefront &amp; Amazon Brand Suite</h3>
+              <p class="work-card-excerpt">Scandinavian minimalist flagship eCommerce storefront with real-time WebGL 3D product visualizer, paired with category-dominating Amazon Brand Store &amp; A+ listings.</p>
               
-              <div class="work-specs-row">
-                <div class="work-spec-item">
-                  <span class="spec-label">Conversion Lift</span>
-                  <span class="spec-val">+240%</span>
+              <div class="work-specs-strip">
+                <div class="spec-cell">
+                  <span class="spec-k">Conversion</span>
+                  <span class="spec-v">+240%</span>
                 </div>
-                <div class="work-spec-item">
-                  <span class="spec-label">LCP Speed</span>
-                  <span class="spec-val">0.8s</span>
+                <div class="spec-cell">
+                  <span class="spec-k">LCP Speed</span>
+                  <span class="spec-v">0.8s</span>
                 </div>
-                <div class="work-spec-item">
-                  <span class="spec-label">Amazon Rank</span>
-                  <span class="spec-val">Top #1 Bestseller</span>
+                <div class="spec-cell">
+                  <span class="spec-k">Amazon Rank</span>
+                  <span class="spec-v">#1 Bestseller</span>
                 </div>
               </div>
 
-              <div class="work-tags">
-                <span>Shopify Plus</span>
-                <span>Three.js 3D</span>
-                <span>Amazon A+ Studio</span>
-                <span>Tailwind CSS</span>
-                <span>Motion UI</span>
+              <div class="work-card-bottom-row">
+                <div class="work-tech-pills">
+                  <span>Shopify Plus</span>
+                  <span>Three.js 3D</span>
+                  <span>Amazon A+</span>
+                  <span>Motion UI</span>
+                </div>
+                <a href="#contact" class="work-case-link" aria-label="Explore Apex Audio Case Study">
+                  <span>Explore Architecture</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
               </div>
             </div>
           </article>
 
           <!-- Project 4: Synapse Cloud Ops -->
-          <article class="work-card" data-category="cloud">
-            <div class="work-card-media">
-              <img src="assets/synapse-cloud.jpg" alt="Synapse Cloud Ops Multi-Cluster Telemetry Engine UI" class="work-card-img" loading="lazy" width="800" height="450">
-              <div class="work-card-overlay">
-                <span class="work-status-badge">Mission Critical</span>
+          <article class="work-runway-card" data-category="cloud" data-index="4">
+            <div class="work-card-media-wrap">
+              <img src="assets/synapse-cloud.jpg" alt="Synapse Cloud Ops UI" class="work-runway-img" loading="lazy" width="800" height="450">
+              <div class="work-media-glow"></div>
+              <div class="work-media-badge-top">
+                <span class="pulse-emerald"></span>
+                <span>Mission Critical</span>
+              </div>
+              <div class="work-media-metric-pill">
+                <span class="metric-num">-78%</span>
+                <span class="metric-txt">Cloud Waste</span>
               </div>
             </div>
-            <div class="work-card-content">
-              <div class="work-card-meta">
-                <span class="work-category">Cloud Infrastructure &bull; DevOps</span>
-                <div class="work-metrics-badge">
-                  <span class="metric-val">-78%</span>
-                  <span class="metric-label">Cloud Spend Waste</span>
-                </div>
+            <div class="work-card-details">
+              <div class="work-details-top">
+                <span class="work-domain-tag">Cloud Infrastructure &bull; DevOps</span>
+                <span class="work-index-tag">04</span>
               </div>
-              <h3 class="work-title">Synapse Cloud &mdash; Multi-Cluster Kubernetes Observability Engine</h3>
-              <p class="work-desc">Engineered an intelligent observability suite with dynamic topology mapping, automated failure self-healing, and sub-second metrics aggregation across 380+ live production nodes.</p>
+              <h3 class="work-card-title">Synapse Cloud &mdash; Multi-Cluster Kubernetes Telemetry</h3>
+              <p class="work-card-excerpt">Intelligent multi-region Kubernetes observability platform with dynamic topology mapping, sub-second telemetry aggregation, and automated eBPF self-healing routines.</p>
               
-              <div class="work-specs-row">
-                <div class="work-spec-item">
-                  <span class="spec-label">Throughput</span>
-                  <span class="spec-val">1.25M req/s</span>
+              <div class="work-specs-strip">
+                <div class="spec-cell">
+                  <span class="spec-k">Throughput</span>
+                  <span class="spec-v">1.25M req/s</span>
                 </div>
-                <div class="work-spec-item">
-                  <span class="spec-label">Nodes Managed</span>
-                  <span class="spec-val">380+ Clusters</span>
+                <div class="spec-cell">
+                  <span class="spec-k">Clusters</span>
+                  <span class="spec-v">380+ Nodes</span>
                 </div>
-                <div class="work-spec-item">
-                  <span class="spec-label">Self-Healing</span>
-                  <span class="spec-val">Sub-second</span>
+                <div class="spec-cell">
+                  <span class="spec-k">Self-Healing</span>
+                  <span class="spec-v">&lt; 1 sec</span>
                 </div>
               </div>
 
-              <div class="work-tags">
-                <span>AWS EKS</span>
-                <span>Terraform</span>
-                <span>Go Engine</span>
-                <span>Prometheus / eBPF</span>
-                <span>Docker</span>
+              <div class="work-card-bottom-row">
+                <div class="work-tech-pills">
+                  <span>AWS EKS</span>
+                  <span>Terraform</span>
+                  <span>eBPF</span>
+                  <span>Docker</span>
+                </div>
+                <a href="#contact" class="work-case-link" aria-label="Explore Synapse Cloud Case Study">
+                  <span>Explore Architecture</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
               </div>
             </div>
           </article>
 
+        </div>
+
+        <!-- Runway Progress Bar Indicator -->
+        <div class="container-standard">
+          <div class="work-runway-progress-track">
+            <div class="work-runway-progress-bar" id="workRunwayProgressBar"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -906,27 +879,350 @@
           </div>
         </div>
 
-        <!-- Enterprise Tech Stack Showcase -->
-        <div class="tech-stack-container">
-          <div class="tech-stack-title">Technologies &amp; Frameworks We Master</div>
-          <div class="tech-badge-cluster">
-            <span class="tech-pill">React</span>
-            <span class="tech-pill">Next.js 15</span>
-            <span class="tech-pill">TypeScript</span>
-            <span class="tech-pill">React Native</span>
-            <span class="tech-pill">Flutter</span>
-            <span class="tech-pill">Swift (iOS)</span>
-            <span class="tech-pill">Python / PyTorch</span>
-            <span class="tech-pill">Go (Golang)</span>
-            <span class="tech-pill">Node.js</span>
-            <span class="tech-pill">OpenAI / Claude LLMs</span>
-            <span class="tech-pill">PostgreSQL</span>
-            <span class="tech-pill">Redis</span>
-            <span class="tech-pill">AWS Cloud</span>
-            <span class="tech-pill">Google Cloud</span>
-            <span class="tech-pill">Docker &amp; K8s</span>
-            <span class="tech-pill">Three.js / WebGL</span>
-            <span class="tech-pill">Figma Systems</span>
+        <!-- Enterprise Tech Stack Kinetic Ecosystem -->
+        <div class="tech-kinetic-ecosystem" id="techEcosystem">
+          <div class="tech-ecosystem-header">
+            <span class="tech-ecosystem-kicker">PRODUCTION GRADE ARCHITECTURE</span>
+            <h3 class="tech-ecosystem-title">Technologies &amp; Frameworks We Master</h3>
+            <p class="tech-ecosystem-desc">From bare-metal edge runtimes and distributed microsecond databases to spatial 3D WebGL and autonomous agentic AI models.</p>
+          </div>
+
+          <div class="tech-marquee-viewport" aria-label="Interactive Tech Stack Streams">
+            <!-- Lane 1: Frontend, AI, Mobile & Spatial (Drifts Left) -->
+            <div class="tech-marquee-track track-left" id="techTrackLane1">
+              <div class="tech-marquee-group">
+                <div class="tech-kinetic-card" data-tech="nextjs">
+                  <div class="tech-card-icon-wrap icon-nextjs">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.3 14.5l-4.9-7.3v7.3H9V7.5h1.5l4.9 7.3V7.5H17v9h-1.7z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Next.js 15</span>
+                    <span class="tech-card-domain">App Router &bull; SSR</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="react">
+                  <div class="tech-card-icon-wrap icon-react">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="1.8"><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(0 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="1.6" fill="#61DAFB"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">React 19</span>
+                    <span class="tech-card-domain">Server Actions &bull; UI</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="typescript">
+                  <div class="tech-card-icon-wrap icon-ts">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#3178C6"/><path d="M6 10h5M8.5 10v7" stroke="#FFF" stroke-width="2" stroke-linecap="round"/><path d="M13 16c.8.6 1.8.8 2.6.4.7-.4.9-1.2.6-1.8-.4-.9-2.5-.9-2.8-2-.3-1 .4-2 1.6-2.2 1-.2 2.1.2 2.8.8" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">TypeScript</span>
+                    <span class="tech-card-domain">Strict Static Typing</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="pytorch">
+                  <div class="tech-card-icon-wrap icon-pytorch">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EE4C2C" stroke-width="2"><path d="M12 3a9 9 0 0 0-9 9c0 3.2 1.7 6.1 4.3 7.7l1.7-2.9A5.8 5.8 0 0 1 6 12a6 6 0 0 1 6-6c2.4 0 4.5 1.4 5.4 3.4L19.3 8A9 9 0 0 0 12 3z"/><circle cx="16.5" cy="5.5" r="1.5" fill="#EE4C2C"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Python &bull; PyTorch</span>
+                    <span class="tech-card-domain">Neural Architecture</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="llms">
+                  <div class="tech-card-icon-wrap icon-ai">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3" fill="#10B981"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">OpenAI &bull; Claude</span>
+                    <span class="tech-card-domain">Autonomous Agents</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="threejs">
+                  <div class="tech-card-icon-wrap icon-threejs">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 2 19 22 19"/><polyline points="12 2 12 19"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Three.js &bull; WebGL</span>
+                    <span class="tech-card-domain">Spatial 3D Shaders</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="swift">
+                  <div class="tech-card-icon-wrap icon-swift">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#FA7343"><path d="M19.8 17.6c-2.3 2.4-5.9 3.6-9.5 3.3 5.4-3.5 7.6-9.2 4.4-14.7 1.8 1.9 3.1 4.5 3.4 7.2.2.4.9 3.2 1.7 4.2zM4.2 3.1c4.5 4.9 8.2 11.2 5.1 17.8-5.3-4.2-6.5-11.4-2.8-16.7.7-.7-1.4-.4-2.3-1.1z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Swift &bull; iOS</span>
+                    <span class="tech-card-domain">Native SwiftUI</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="flutter">
+                  <div class="tech-card-icon-wrap icon-flutter">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#02569B"><path d="M14.2 2.5L3.5 13.2l3.3 3.3L20.8 2.5h-6.6zm0 11.2l-4.7 4.7 4.7 4.7h6.6l-8-8-3.3 3.3 4.7 4.7z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Flutter &bull; Dart</span>
+                    <span class="tech-card-domain">Cross-Platform 120fps</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Duplicate Set for Seamless Continuous 60fps Loop -->
+              <div class="tech-marquee-group" aria-hidden="true">
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-nextjs">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.3 14.5l-4.9-7.3v7.3H9V7.5h1.5l4.9 7.3V7.5H17v9h-1.7z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Next.js 15</span>
+                    <span class="tech-card-domain">App Router &bull; SSR</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-react">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="1.8"><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(0 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4.2" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="1.6" fill="#61DAFB"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">React 19</span>
+                    <span class="tech-card-domain">Server Actions &bull; UI</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-ts">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#3178C6"/><path d="M6 10h5M8.5 10v7" stroke="#FFF" stroke-width="2" stroke-linecap="round"/><path d="M13 16c.8.6 1.8.8 2.6.4.7-.4.9-1.2.6-1.8-.4-.9-2.5-.9-2.8-2-.3-1 .4-2 1.6-2.2 1-.2 2.1.2 2.8.8" stroke="#FFF" stroke-width="2" stroke-linecap="round"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">TypeScript</span>
+                    <span class="tech-card-domain">Strict Static Typing</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-pytorch">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EE4C2C" stroke-width="2"><path d="M12 3a9 9 0 0 0-9 9c0 3.2 1.7 6.1 4.3 7.7l1.7-2.9A5.8 5.8 0 0 1 6 12a6 6 0 0 1 6-6c2.4 0 4.5 1.4 5.4 3.4L19.3 8A9 9 0 0 0 12 3z"/><circle cx="16.5" cy="5.5" r="1.5" fill="#EE4C2C"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Python &bull; PyTorch</span>
+                    <span class="tech-card-domain">Neural Architecture</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-ai">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3" fill="#10B981"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">OpenAI &bull; Claude</span>
+                    <span class="tech-card-domain">Autonomous Agents</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-threejs">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 2 19 22 19"/><polyline points="12 2 12 19"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Three.js &bull; WebGL</span>
+                    <span class="tech-card-domain">Spatial 3D Shaders</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-swift">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#FA7343"><path d="M19.8 17.6c-2.3 2.4-5.9 3.6-9.5 3.3 5.4-3.5 7.6-9.2 4.4-14.7 1.8 1.9 3.1 4.5 3.4 7.2.2.4.9 3.2 1.7 4.2zM4.2 3.1c4.5 4.9 8.2 11.2 5.1 17.8-5.3-4.2-6.5-11.4-2.8-16.7.7-.7-1.4-.4-2.3-1.1z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Swift &bull; iOS</span>
+                    <span class="tech-card-domain">Native SwiftUI</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-flutter">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#02569B"><path d="M14.2 2.5L3.5 13.2l3.3 3.3L20.8 2.5h-6.6zm0 11.2l-4.7 4.7 4.7 4.7h6.6l-8-8-3.3 3.3 4.7 4.7z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Flutter &bull; Dart</span>
+                    <span class="tech-card-domain">Cross-Platform 120fps</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lane 2: Distributed Core, Cloud, Storage & Telemetry (Drifts Right) -->
+            <div class="tech-marquee-track track-right" id="techTrackLane2">
+              <div class="tech-marquee-group">
+                <div class="tech-kinetic-card" data-tech="golang">
+                  <div class="tech-card-icon-wrap icon-golang">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#00ADD8"><path d="M3 11.5c0-.8.6-1.5 1.5-1.5h4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5h-4c-.9 0-1.5-.7-1.5-1.5zm11-2.5c2.8 0 5 2.2 5 5s-2.2 5-5 5c-1.8 0-3.3-.9-4.2-2.3l1.8-1.2c.5.9 1.4 1.5 2.4 1.5 1.7 0 3-1.3 3-3s-1.3-3-3-3c-1.4 0-2.5.9-2.9 2.1H9c.5-2.6 2.8-4.6 5-4.6z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Go (Golang)</span>
+                    <span class="tech-card-domain">Sub-ms Microservices</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="nodejs">
+                  <div class="tech-card-icon-wrap icon-nodejs">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#5FA04E"><path d="M12 2l9 5.2v10.4L12 22.8 3 17.6V7.2L12 2zm0 3.2L5.5 8.9v7.1l6.5 3.8 6.5-3.8V8.9L12 5.2z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Node.js</span>
+                    <span class="tech-card-domain">Event Runtimes</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="postgres">
+                  <div class="tech-card-icon-wrap icon-postgres">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#336791" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">PostgreSQL</span>
+                    <span class="tech-card-domain">ACID Relational Core</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="redis">
+                  <div class="tech-card-icon-wrap icon-redis">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#DC382D"><polygon points="12 2 22 7.5 22 17.5 12 22.5 2 17.5 2 7.5"/><polyline points="12 2 12 22.5"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Redis</span>
+                    <span class="tech-card-domain">In-Memory Cache &bull; PubSub</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="aws">
+                  <div class="tech-card-icon-wrap icon-aws">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF9900" stroke-width="2"><path d="M6 16.5c-2.5 1.5-4 3.5-4 4.5 5 3 13 3 18 0-.5-1-2.5-3-5.5-4.5"/><path d="M17.5 8a5 5 0 0 0-9.8-1.5A4.5 4.5 0 0 0 4 11a4.5 4.5 0 0 0 4.5 4.5h9A4.5 4.5 0 0 0 22 11a4.5 4.5 0 0 0-4.5-3z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">AWS Cloud</span>
+                    <span class="tech-card-domain">Multi-Region EKS &bull; Lambda</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="k8s">
+                  <div class="tech-card-icon-wrap icon-k8s">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#326CE5" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="4.2" y1="7.5" x2="9.4" y2="10.5"/><line x1="14.6" y1="13.5" x2="19.8" y2="16.5"/><line x1="4.2" y1="16.5" x2="9.4" y2="13.5"/><line x1="14.6" y1="10.5" x2="19.8" y2="7.5"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Kubernetes &bull; K8s</span>
+                    <span class="tech-card-domain">Cluster Orchestration</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="cloudflare">
+                  <div class="tech-card-icon-wrap icon-cloudflare">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#F38020"><path d="M19.4 14.5c.3-.5.5-1.1.5-1.8 0-1.9-1.5-3.5-3.4-3.5-.4 0-.7.1-1.1.2C14.7 7 12.6 5.5 10.2 5.5c-3 0-5.5 2.3-5.7 5.3-.9.4-1.5 1.3-1.5 2.4 0 1.5 1.2 2.7 2.7 2.7h13.7z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Cloudflare Edge</span>
+                    <span class="tech-card-domain">Serverless Workers &bull; CDN</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card" data-tech="ebpf">
+                  <div class="tech-card-icon-wrap icon-ebpf">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">eBPF &bull; Prometheus</span>
+                    <span class="tech-card-domain">Deep Kernel Observability</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Duplicate Set for Seamless Continuous 60fps Loop -->
+              <div class="tech-marquee-group" aria-hidden="true">
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-golang">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#00ADD8"><path d="M3 11.5c0-.8.6-1.5 1.5-1.5h4c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5h-4c-.9 0-1.5-.7-1.5-1.5zm11-2.5c2.8 0 5 2.2 5 5s-2.2 5-5 5c-1.8 0-3.3-.9-4.2-2.3l1.8-1.2c.5.9 1.4 1.5 2.4 1.5 1.7 0 3-1.3 3-3s-1.3-3-3-3c-1.4 0-2.5.9-2.9 2.1H9c.5-2.6 2.8-4.6 5-4.6z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Go (Golang)</span>
+                    <span class="tech-card-domain">Sub-ms Microservices</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-nodejs">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#5FA04E"><path d="M12 2l9 5.2v10.4L12 22.8 3 17.6V7.2L12 2zm0 3.2L5.5 8.9v7.1l6.5 3.8 6.5-3.8V8.9L12 5.2z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Node.js</span>
+                    <span class="tech-card-domain">Event Runtimes</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-postgres">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#336791" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">PostgreSQL</span>
+                    <span class="tech-card-domain">ACID Relational Core</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-redis">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#DC382D"><polygon points="12 2 22 7.5 22 17.5 12 22.5 2 17.5 2 7.5"/><polyline points="12 2 12 22.5"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Redis</span>
+                    <span class="tech-card-domain">In-Memory Cache &bull; PubSub</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-aws">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF9900" stroke-width="2"><path d="M6 16.5c-2.5 1.5-4 3.5-4 4.5 5 3 13 3 18 0-.5-1-2.5-3-5.5-4.5"/><path d="M17.5 8a5 5 0 0 0-9.8-1.5A4.5 4.5 0 0 0 4 11a4.5 4.5 0 0 0 4.5 4.5h9A4.5 4.5 0 0 0 22 11a4.5 4.5 0 0 0-4.5-3z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">AWS Cloud</span>
+                    <span class="tech-card-domain">Multi-Region EKS &bull; Lambda</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-k8s">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#326CE5" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="4.2" y1="7.5" x2="9.4" y2="10.5"/><line x1="14.6" y1="13.5" x2="19.8" y2="16.5"/><line x1="4.2" y1="16.5" x2="9.4" y2="13.5"/><line x1="14.6" y1="10.5" x2="19.8" y2="7.5"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Kubernetes &bull; K8s</span>
+                    <span class="tech-card-domain">Cluster Orchestration</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-cloudflare">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#F38020"><path d="M19.4 14.5c.3-.5.5-1.1.5-1.8 0-1.9-1.5-3.5-3.4-3.5-.4 0-.7.1-1.1.2C14.7 7 12.6 5.5 10.2 5.5c-3 0-5.5 2.3-5.7 5.3-.9.4-1.5 1.3-1.5 2.4 0 1.5 1.2 2.7 2.7 2.7h13.7z"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">Cloudflare Edge</span>
+                    <span class="tech-card-domain">Serverless Workers &bull; CDN</span>
+                  </div>
+                </div>
+
+                <div class="tech-kinetic-card">
+                  <div class="tech-card-icon-wrap icon-ebpf">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  </div>
+                  <div class="tech-card-info">
+                    <span class="tech-card-name">eBPF &bull; Prometheus</span>
+                    <span class="tech-card-domain">Deep Kernel Observability</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1238,9 +1534,15 @@
                 <div class="channel-icon" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 </div>
-                <div>
-                  <span class="channel-label">Direct Inquiries</span>
-                  <a href="mailto:contact@softrasol.com" class="channel-link">contact@softrasol.com</a>
+                <div class="channel-body">
+                  <span class="channel-label">Direct Engineering Inquiries</span>
+                  <div class="channel-action-row">
+                    <a href="mailto:contact@softrasol.com" class="channel-link" id="directEmailLink">contact@softrasol.com</a>
+                    <button type="button" class="btn-copy-chip" id="copyDirectEmailBtn" title="Copy email address" aria-label="Copy email address">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                      <span id="copyDirectEmailText">Copy</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -1248,7 +1550,7 @@
                 <div class="channel-icon" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 </div>
-                <div>
+                <div class="channel-body">
                   <span class="channel-label">Response Guarantee</span>
                   <span class="channel-link">Under 2 hours response time</span>
                 </div>
@@ -1256,9 +1558,19 @@
 
               <div class="channel-item">
                 <div class="channel-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </div>
+                <div class="channel-body">
+                  <span class="channel-label">Architecture Review</span>
+                  <a href="mailto:contact@softrasol.com?subject=Book%20Technical%20Architecture%20Review" class="channel-link link-accent">Schedule 20-min Discovery &rarr;</a>
+                </div>
+              </div>
+
+              <div class="channel-item">
+                <div class="channel-icon" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 </div>
-                <div>
+                <div class="channel-body">
                   <span class="channel-label">Global Presence</span>
                   <span class="channel-link">Serving US, UK, EU &amp; Global Clients</span>
                 </div>
@@ -1278,61 +1590,94 @@
               <div class="form-group">
                 <label class="form-label" id="serviceLabel">What service are you looking for?</label>
                 <div class="chips-container" id="serviceChips" role="group" aria-labelledby="serviceLabel">
-                  <button type="button" class="chip-btn active" data-value="high-conversion-web" aria-pressed="true">High Conversion Web</button>
-                  <button type="button" class="chip-btn" data-value="complex-product" aria-pressed="false">Complex Product</button>
-                  <button type="button" class="chip-btn" data-value="mobile-app" aria-pressed="false">Mobile App</button>
-                  <button type="button" class="chip-btn" data-value="ai-integration" aria-pressed="false">AI Integration</button>
-                  <button type="button" class="chip-btn" data-value="ecommerce-amazon" aria-pressed="false">Amazon &amp; eCommerce</button>
-                  <button type="button" class="chip-btn" data-value="cloud-devops" aria-pressed="false">Cloud &amp; DevOps</button>
+                  <button type="button" class="chip-btn active" data-value="High Conversion Web" aria-pressed="true">High Conversion Web</button>
+                  <button type="button" class="chip-btn" data-value="Complex Product / SaaS" aria-pressed="false">Complex Product</button>
+                  <button type="button" class="chip-btn" data-value="Mobile App (iOS / Android)" aria-pressed="false">Mobile App</button>
+                  <button type="button" class="chip-btn" data-value="AI Integration & LLMs" aria-pressed="false">AI Integration</button>
+                  <button type="button" class="chip-btn" data-value="Amazon & eCommerce Architecture" aria-pressed="false">Amazon &amp; eCommerce</button>
+                  <button type="button" class="chip-btn" data-value="Cloud Infrastructure & DevOps" aria-pressed="false">Cloud &amp; DevOps</button>
                 </div>
-                <input type="hidden" name="service" id="selectedServiceInput" value="high-conversion-web">
+                <input type="hidden" name="service" id="selectedServiceInput" value="High Conversion Web">
               </div>
 
               <!-- Budget Chips -->
               <div class="form-group">
                 <label class="form-label" id="budgetLabel">Estimated Budget</label>
                 <div class="chips-container" id="budgetChips" role="group" aria-labelledby="budgetLabel">
-                  <button type="button" class="chip-btn" data-value="under-10k" aria-pressed="false">&lt; $10k</button>
-                  <button type="button" class="chip-btn active" data-value="10k-25k" aria-pressed="true">$10k &ndash; $25k</button>
-                  <button type="button" class="chip-btn" data-value="25k-50k" aria-pressed="false">$25k &ndash; $50k</button>
-                  <button type="button" class="chip-btn" data-value="50k-plus" aria-pressed="false">$50k+</button>
+                  <button type="button" class="chip-btn" data-value="Under $10k" aria-pressed="false">&lt; $10k</button>
+                  <button type="button" class="chip-btn active" data-value="$10k – $25k" aria-pressed="true">$10k &ndash; $25k</button>
+                  <button type="button" class="chip-btn" data-value="$25k – $50k" aria-pressed="false">$25k &ndash; $50k</button>
+                  <button type="button" class="chip-btn" data-value="$50k+" aria-pressed="false">$50k+</button>
                 </div>
-                <input type="hidden" name="budget" id="selectedBudgetInput" value="10k-25k">
+                <input type="hidden" name="budget" id="selectedBudgetInput" value="$10k – $25k">
               </div>
 
               <!-- Contact Inputs -->
               <div class="form-grid-2">
                 <div class="form-group">
-                  <label for="clientName" class="form-label">Your Name</label>
+                  <label for="clientName" class="form-label">Your Name <span class="req-star" aria-hidden="true">*</span></label>
                   <input type="text" id="clientName" class="form-input" placeholder="e.g. Alex Morgan" required autocomplete="name">
+                  <div class="form-inline-error" id="nameError"></div>
                 </div>
                 <div class="form-group">
-                  <label for="clientEmail" class="form-label">Work Email</label>
+                  <label for="clientEmail" class="form-label">Work Email <span class="req-star" aria-hidden="true">*</span></label>
                   <input type="email" id="clientEmail" class="form-input" placeholder="alex@company.com" required autocomplete="email">
+                  <div class="form-inline-error" id="emailError"></div>
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="clientCompany" class="form-label">Company / Venture Name (Optional)</label>
+                <label for="clientCompany" class="form-label">Company / Venture Name <span class="opt-tag">(Optional)</span></label>
                 <input type="text" id="clientCompany" class="form-input" placeholder="e.g. Acme Innovations" autocomplete="organization">
               </div>
 
               <div class="form-group">
-                <label for="clientMessage" class="form-label">Project Overview &amp; Goals</label>
+                <label for="clientMessage" class="form-label">Project Overview &amp; Goals <span class="req-star" aria-hidden="true">*</span></label>
                 <textarea id="clientMessage" class="form-textarea" rows="3" placeholder="Tell us about what you're building, your timeline, and key goals..." required></textarea>
+                <div class="form-inline-error" id="messageError"></div>
               </div>
 
               <button type="submit" class="btn-primary w-full btn-submit-inquiry" id="submitInquiryBtn">
-                <span>Submit Project Request</span>
+                <span id="submitBtnText">Submit Project Request</span>
                 <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M9.99947 15.4369L9.06395 14.4847L12.898 10.6601H4.5625V9.33981H12.898L9.06395 5.50576L9.99947 4.56299L15.4364 9.99996L9.99947 15.4369Z" fill="currentColor"/></svg>
               </button>
+            </form>
 
-              <div class="form-success-alert" id="formSuccessAlert" style="display: none;" role="status" aria-live="polite">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                <span>Thank you! Your project request has been received. Our engineering lead will get back to you within 2 hours.</span>
+            <!-- Actionable Transmission Hub (Revealed upon Submission) -->
+            <div class="inquiry-action-hub" id="inquiryActionHub" style="display: none;" role="region" aria-label="Inquiry Action Hub">
+              <div class="hub-status-header">
+                <div class="hub-status-pill">
+                  <span class="hub-status-dot"></span>
+                  <span>Inquiry Prepared &bull; Actionable Hub</span>
+                </div>
+                <h3 class="hub-title">Ready to Transmit to Engineering</h3>
+                <p class="hub-desc">We opened your default email client with your project brief pre-formatted. If it did not open automatically, choose an instant action below:</p>
               </div>
 
-            </form>
+              <div class="hub-preview-card">
+                <div class="hub-preview-bar">
+                  <span class="preview-tag">Project Brief Spec</span>
+                  <span class="preview-recipient">Recipient: contact@softrasol.com</span>
+                </div>
+                <pre class="hub-preview-body" id="hubPreviewBody"></pre>
+              </div>
+
+              <div class="hub-actions-cluster">
+                <a href="#" class="btn-primary hub-action-btn" id="hubDirectMailtoBtn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  <span>Open in Email App</span>
+                </a>
+                <button type="button" class="btn-secondary hub-copy-btn" id="hubCopyDetailsBtn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span id="hubCopyDetailsText">Copy Inquiry Spec</span>
+                </button>
+              </div>
+
+              <div class="hub-footer-row">
+                <button type="button" class="hub-btn-reset" id="hubResetFormBtn">&larr; Edit Details / Submit Another Project</button>
+                <span class="hub-sla-note">&bull; Reply guaranteed in &lt; 2 hrs</span>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -1421,6 +1766,6 @@
 
   <!-- Scripts -->
   <script src="wave.js"></script>
-  <script src="app.js?v=20261026_05"></script>
+  <script src="app.js?v=20261026_08"></script>
 </body>
 </html>

@@ -252,11 +252,100 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 8. Interactive Work Category Filter Tabs
+  // 8. Cinematic Work Horizontal Runway Slider & Category Filter
   // =========================================================================
+  const runwayTrack = document.getElementById('workRunwayTrack');
+  const runwayCards = document.querySelectorAll('.work-runway-card');
+  const workPrevBtn = document.getElementById('workPrevBtn');
+  const workNextBtn = document.getElementById('workNextBtn');
+  const workCounterActive = document.getElementById('workCounterActive');
+  const workProgressBar = document.getElementById('workRunwayProgressBar');
   const filterBtns = document.querySelectorAll('.work-filter-btn');
-  const workCards = document.querySelectorAll('.work-card');
 
+  function updateRunwayProgress() {
+    if (!runwayTrack) return;
+    const scrollLeft = runwayTrack.scrollLeft;
+    const maxScroll = runwayTrack.scrollWidth - runwayTrack.clientWidth;
+    const progress = maxScroll > 0 ? Math.min(100, Math.max(0, (scrollLeft / maxScroll) * 100)) : 0;
+    
+    if (workProgressBar) {
+      workProgressBar.style.width = `${progress}%`;
+    }
+
+    // Determine currently active card based on center position
+    if (runwayCards.length > 0 && workCounterActive) {
+      const trackRect = runwayTrack.getBoundingClientRect();
+      const trackCenter = trackRect.left + trackRect.width / 2;
+      let closestCardIndex = 0;
+      let minDistance = Infinity;
+
+      runwayCards.forEach((card, idx) => {
+        if (card.style.display !== 'none') {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const distance = Math.abs(trackCenter - cardCenter);
+          if (distance < minDistance) {
+            minDistance = distance;
+            closestCardIndex = idx;
+          }
+        }
+      });
+
+      workCounterActive.textContent = String(closestCardIndex + 1).padStart(2, '0');
+    }
+  }
+
+  if (runwayTrack) {
+    runwayTrack.addEventListener('scroll', updateRunwayProgress, { passive: true });
+    updateRunwayProgress();
+
+    // Arrow navigation
+    const getScrollStep = () => {
+      const firstCard = runwayTrack.querySelector('.work-runway-card:not([style*="display: none"])');
+      return firstCard ? firstCard.offsetWidth + 28 : 500;
+    };
+
+    if (workPrevBtn) {
+      workPrevBtn.addEventListener('click', () => {
+        runwayTrack.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+      });
+    }
+
+    if (workNextBtn) {
+      workNextBtn.addEventListener('click', () => {
+        runwayTrack.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+      });
+    }
+
+    // Mouse Drag to Scroll for Desktop Users
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    runwayTrack.addEventListener('mousedown', (e) => {
+      // Don't drag if clicking links or buttons
+      if (e.target.closest('a') || e.target.closest('button')) return;
+      isDown = true;
+      runwayTrack.classList.add('is-dragging');
+      startX = e.pageX - runwayTrack.offsetLeft;
+      scrollStart = runwayTrack.scrollLeft;
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDown = false;
+      if (runwayTrack) runwayTrack.classList.remove('is-dragging');
+    });
+
+    runwayTrack.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - runwayTrack.offsetLeft;
+      const walk = (x - startX) * 1.6;
+      runwayTrack.scrollLeft = scrollStart - walk;
+    });
+  }
+
+  // Filter Buttons
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = btn.getAttribute('data-filter');
@@ -268,35 +357,66 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
 
-      workCards.forEach(card => {
+      let visibleCount = 0;
+      runwayCards.forEach(card => {
         const category = card.getAttribute('data-category');
         if (filter === 'all' || category === filter) {
           card.style.display = 'flex';
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(12px)';
-          requestAnimationFrame(() => {
-            card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          });
+          visibleCount++;
         } else {
           card.style.display = 'none';
         }
       });
+
+      if (runwayTrack) {
+        runwayTrack.scrollTo({ left: 0, behavior: 'smooth' });
+        setTimeout(updateRunwayProgress, 200);
+      }
     });
   });
 
   // =========================================================================
-  // 9. Interactive Project Inquiry Form & Chip Selectors
+  // 9. Actionable Project Inquiry Transmission Hub & Validation
   // =========================================================================
   const serviceChips = document.querySelectorAll('#serviceChips .chip-btn');
   const serviceInput = document.getElementById('selectedServiceInput');
   const budgetChips = document.querySelectorAll('#budgetChips .chip-btn');
   const budgetInput = document.getElementById('selectedBudgetInput');
   const inquiryForm = document.getElementById('projectInquiryForm');
-  const formSuccessAlert = document.getElementById('formSuccessAlert');
+  const inquiryActionHub = document.getElementById('inquiryActionHub');
+  const hubPreviewBody = document.getElementById('hubPreviewBody');
+  const hubDirectMailtoBtn = document.getElementById('hubDirectMailtoBtn');
+  const hubCopyDetailsBtn = document.getElementById('hubCopyDetailsBtn');
+  const hubCopyDetailsText = document.getElementById('hubCopyDetailsText');
+  const hubResetFormBtn = document.getElementById('hubResetFormBtn');
   const submitInquiryBtn = document.getElementById('submitInquiryBtn');
+  const submitBtnText = document.getElementById('submitBtnText');
 
+  // Direct Left Column Email Copy
+  const copyDirectEmailBtn = document.getElementById('copyDirectEmailBtn');
+  const copyDirectEmailText = document.getElementById('copyDirectEmailText');
+  if (copyDirectEmailBtn) {
+    copyDirectEmailBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await navigator.clipboard.writeText('contact@softrasol.com');
+        if (copyDirectEmailText) {
+          copyDirectEmailText.textContent = 'Copied!';
+          copyDirectEmailBtn.classList.add('copied');
+          setTimeout(() => {
+            copyDirectEmailText.textContent = 'Copy';
+            copyDirectEmailBtn.classList.remove('copied');
+          }, 2200);
+        }
+      } catch (err) {
+        // Fallback
+        const directLink = document.getElementById('directEmailLink');
+        if (directLink) directLink.click();
+      }
+    });
+  }
+
+  // Service Chip Selection
   serviceChips.forEach(chip => {
     chip.addEventListener('click', () => {
       serviceChips.forEach(c => {
@@ -305,10 +425,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       chip.classList.add('active');
       chip.setAttribute('aria-pressed', 'true');
-      if (serviceInput) serviceInput.value = chip.getAttribute('data-value');
+      if (serviceInput) serviceInput.value = chip.getAttribute('data-value') || chip.textContent.trim();
     });
   });
 
+  // Budget Chip Selection
   budgetChips.forEach(chip => {
     chip.addEventListener('click', () => {
       budgetChips.forEach(c => {
@@ -317,39 +438,191 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       chip.classList.add('active');
       chip.setAttribute('aria-pressed', 'true');
-      if (budgetInput) budgetInput.value = chip.getAttribute('data-value');
+      if (budgetInput) budgetInput.value = chip.getAttribute('data-value') || chip.textContent.trim();
     });
   });
+
+  // Real-time inline field validation
+  const clientNameInput = document.getElementById('clientName');
+  const clientEmailInput = document.getElementById('clientEmail');
+  const clientCompanyInput = document.getElementById('clientCompany');
+  const clientMessageInput = document.getElementById('clientMessage');
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
+  const messageError = document.getElementById('messageError');
+
+  function clearError(input, errorEl) {
+    if (input) input.classList.remove('input-error-state');
+    if (errorEl) {
+      errorEl.textContent = '';
+      errorEl.style.display = 'none';
+    }
+  }
+
+  function setError(input, errorEl, message) {
+    if (input) {
+      input.classList.add('input-error-state');
+      input.focus();
+    }
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.style.display = 'block';
+    }
+  }
+
+  if (clientNameInput) {
+    clientNameInput.addEventListener('input', () => clearError(clientNameInput, nameError));
+  }
+  if (clientEmailInput) {
+    clientEmailInput.addEventListener('input', () => clearError(clientEmailInput, emailError));
+  }
+  if (clientMessageInput) {
+    clientMessageInput.addEventListener('input', () => clearError(clientMessageInput, messageError));
+  }
+
+  let lastGeneratedSpec = '';
+  let lastMailtoUrl = '';
 
   if (inquiryForm) {
     inquiryForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('clientName')?.value.trim();
-      const email = document.getElementById('clientEmail')?.value.trim();
-      const message = document.getElementById('clientMessage')?.value.trim();
 
-      if (!name || !email || !message) {
-        alert('Please fill in your name, email, and project overview.');
+      const name = clientNameInput ? clientNameInput.value.trim() : '';
+      const email = clientEmailInput ? clientEmailInput.value.trim() : '';
+      const company = clientCompanyInput ? clientCompanyInput.value.trim() : '';
+      const message = clientMessageInput ? clientMessageInput.value.trim() : '';
+      const selectedService = (serviceInput && serviceInput.value) || 'High Conversion Web';
+      const selectedBudget = (budgetInput && budgetInput.value) || '$10k – $25k';
+
+      // Validate Name
+      if (!name || name.length < 2) {
+        setError(clientNameInput, nameError, 'Please enter your full name (minimum 2 characters).');
         return;
       }
 
-      if (submitInquiryBtn) {
-        submitInquiryBtn.disabled = true;
-        const textSpan = submitInquiryBtn.querySelector('span');
-        if (textSpan) textSpan.textContent = 'Transmitting Request...';
+      // Validate Email
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailPattern.test(email)) {
+        setError(clientEmailInput, emailError, 'Please enter a valid work email address (e.g. name@company.com).');
+        return;
       }
 
+      // Validate Message
+      if (!message || message.length < 10) {
+        setError(clientMessageInput, messageError, 'Please describe your project or requirements (at least 10 characters).');
+        return;
+      }
+
+      // Indicate Transmission in Progress
+      if (submitInquiryBtn) {
+        submitInquiryBtn.disabled = true;
+        if (submitBtnText) submitBtnText.textContent = 'Assembling Transmission Hub...';
+      }
+
+      // Formulate Structured Enterprise Spec
+      const formattedSubject = `[Project Inquiry] ${selectedService} — ${name}${company ? ' (' + company + ')' : ''}`;
+      
+      const structuredBody = 
+`Hello Softra Sol Engineering Team,
+
+I would like to discuss a project with Softra Sol. Here are our project details:
+
+=========================================
+PROJECT BRIEF & SPECIFICATION
+=========================================
+• Client Name:       ${name}
+• Work Email:        ${email}
+• Company / Venture:  ${company || 'Direct Client'}
+• Requested Service:  ${selectedService}
+• Estimated Budget:   ${selectedBudget}
+
+PROJECT OVERVIEW & OBJECTIVES:
+${message}
+
+=========================================
+Dispatched via Softra Sol Engineering Portal`;
+
+      lastGeneratedSpec = structuredBody;
+      lastMailtoUrl = `mailto:contact@softrasol.com?subject=${encodeURIComponent(formattedSubject)}&body=${encodeURIComponent(structuredBody)}`;
+
       setTimeout(() => {
+        // Update Action Hub
+        if (hubPreviewBody) {
+          hubPreviewBody.textContent = structuredBody;
+        }
+
+        if (hubDirectMailtoBtn) {
+          hubDirectMailtoBtn.href = lastMailtoUrl;
+        }
+
+        // Smooth switch between form and Action Hub
+        inquiryForm.style.display = 'none';
+        if (inquiryActionHub) {
+          inquiryActionHub.style.display = 'block';
+          inquiryActionHub.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
         if (submitInquiryBtn) {
           submitInquiryBtn.disabled = false;
-          const textSpan = submitInquiryBtn.querySelector('span');
-          if (textSpan) textSpan.textContent = 'Request Sent!';
+          if (submitBtnText) submitBtnText.textContent = 'Submit Project Request';
         }
-        if (formSuccessAlert) {
-          formSuccessAlert.style.display = 'flex';
+
+        // Trigger native email client with prefilled spec
+        try {
+          const mailLink = document.createElement('a');
+          mailLink.href = lastMailtoUrl;
+          mailLink.target = '_blank';
+          mailLink.rel = 'noopener noreferrer';
+          document.body.appendChild(mailLink);
+          mailLink.click();
+          document.body.removeChild(mailLink);
+        } catch (err) {
+          console.warn('Native mailto trigger intercepted:', err);
         }
-        inquiryForm.reset();
-      }, 700);
+      }, 350);
+    });
+  }
+
+  // Copy Inquiry Spec Button
+  if (hubCopyDetailsBtn) {
+    hubCopyDetailsBtn.addEventListener('click', async () => {
+      if (!lastGeneratedSpec) return;
+      try {
+        await navigator.clipboard.writeText(lastGeneratedSpec);
+        if (hubCopyDetailsText) {
+          hubCopyDetailsText.textContent = '✓ Copied to Clipboard!';
+          hubCopyDetailsBtn.classList.add('copied');
+          setTimeout(() => {
+            hubCopyDetailsText.textContent = 'Copy Inquiry Spec';
+            hubCopyDetailsBtn.classList.remove('copied');
+          }, 2500);
+        }
+      } catch (err) {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = lastGeneratedSpec;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        if (hubCopyDetailsText) {
+          hubCopyDetailsText.textContent = '✓ Copied!';
+          setTimeout(() => {
+            hubCopyDetailsText.textContent = 'Copy Inquiry Spec';
+          }, 2000);
+        }
+      }
+    });
+  }
+
+  // Reset / Edit Form Button
+  if (hubResetFormBtn) {
+    hubResetFormBtn.addEventListener('click', () => {
+      if (inquiryActionHub) inquiryActionHub.style.display = 'none';
+      if (inquiryForm) {
+        inquiryForm.style.display = 'flex';
+        inquiryForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
     });
   }
 
