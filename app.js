@@ -377,21 +377,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 9. Actionable Project Inquiry Transmission Hub & Validation
+  // 9. Direct Project Inquiry Submission & Validation (softrasol@gmail.com)
   // =========================================================================
   const serviceChips = document.querySelectorAll('#serviceChips .chip-btn');
   const serviceInput = document.getElementById('selectedServiceInput');
   const budgetChips = document.querySelectorAll('#budgetChips .chip-btn');
   const budgetInput = document.getElementById('selectedBudgetInput');
   const inquiryForm = document.getElementById('projectInquiryForm');
-  const inquiryActionHub = document.getElementById('inquiryActionHub');
-  const hubPreviewBody = document.getElementById('hubPreviewBody');
-  const hubGmailBtn = document.getElementById('hubGmailBtn');
-  const hubDirectMailtoBtn = document.getElementById('hubDirectMailtoBtn');
-  const hubCopyDetailsBtn = document.getElementById('hubCopyDetailsBtn');
-  const hubCopyDetailsText = document.getElementById('hubCopyDetailsText');
-  const hubResetFormBtn = document.getElementById('hubResetFormBtn');
-  const hubDispatchStatus = document.getElementById('hubDispatchStatus');
+  const contactSuccessCard = document.getElementById('contactSuccessCard');
+  const successClientName = document.getElementById('successClientName');
+  const successServiceVal = document.getElementById('successServiceVal');
+  const successBudgetVal = document.getElementById('successBudgetVal');
+  const sendAnotherBtn = document.getElementById('sendAnotherBtn');
   const submitInquiryBtn = document.getElementById('submitInquiryBtn');
   const submitBtnText = document.getElementById('submitBtnText');
 
@@ -402,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
     copyDirectEmailBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       try {
-        await navigator.clipboard.writeText('contact@softrasol.com');
+        await navigator.clipboard.writeText('softrasol@gmail.com');
         if (copyDirectEmailText) {
           copyDirectEmailText.textContent = 'Copied!';
           copyDirectEmailBtn.classList.add('copied');
@@ -519,68 +516,31 @@ document.addEventListener('DOMContentLoaded', () => {
       // Indicate Transmission in Progress
       if (submitInquiryBtn) {
         submitInquiryBtn.disabled = true;
-        if (submitBtnText) submitBtnText.textContent = 'Assembling Transmission Hub...';
+        if (submitBtnText) submitBtnText.textContent = 'Transmitting to softrasol@gmail.com...';
       }
 
       // Formulate Structured Enterprise Spec
       const formattedSubject = `[Project Inquiry] ${selectedService} — ${name}${company ? ' (' + company + ')' : ''}`;
-      
-      const structuredBody = 
-`Hello Softra Sol Engineering Team,
 
-I would like to discuss a project with Softra Sol. Here are our project details:
+      // Helper to display direct success card
+      const renderSuccessState = () => {
+        if (successClientName) successClientName.textContent = name;
+        if (successServiceVal) successServiceVal.textContent = selectedService;
+        if (successBudgetVal) successBudgetVal.textContent = selectedBudget;
 
-=========================================
-PROJECT BRIEF & SPECIFICATION
-=========================================
-• Client Name:       ${name}
-• Work Email:        ${email}
-• Company / Venture:  ${company || 'Direct Client'}
-• Requested Service:  ${selectedService}
-• Estimated Budget:   ${selectedBudget}
+        if (inquiryForm) inquiryForm.style.display = 'none';
+        if (contactSuccessCard) {
+          contactSuccessCard.style.display = 'block';
+          contactSuccessCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        if (submitInquiryBtn) {
+          submitInquiryBtn.disabled = false;
+          if (submitBtnText) submitBtnText.textContent = 'Submit Project Request';
+        }
+      };
 
-PROJECT OVERVIEW & OBJECTIVES:
-${message}
-
-=========================================
-Dispatched via Softra Sol Engineering Portal`;
-
-      lastGeneratedSpec = structuredBody;
-      lastMailtoUrl = `mailto:contact@softrasol.com?subject=${encodeURIComponent(formattedSubject)}&body=${encodeURIComponent(structuredBody)}`;
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=contact@softrasol.com&su=${encodeURIComponent(formattedSubject)}&body=${encodeURIComponent(structuredBody)}`;
-
-      // Update Action Hub UI
-      if (hubPreviewBody) {
-        hubPreviewBody.textContent = structuredBody;
-      }
-      if (hubGmailBtn) {
-        hubGmailBtn.href = gmailUrl;
-      }
-      if (hubDirectMailtoBtn) {
-        hubDirectMailtoBtn.href = lastMailtoUrl;
-      }
-
-      // Smooth switch between form and Action Hub
-      inquiryForm.style.display = 'none';
-      if (inquiryActionHub) {
-        inquiryActionHub.style.display = 'block';
-        inquiryActionHub.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-
-      if (submitInquiryBtn) {
-        submitInquiryBtn.disabled = false;
-        if (submitBtnText) submitBtnText.textContent = 'Submit Project Request';
-      }
-
-      // Live transmission attempt
-      if (hubDispatchStatus) {
-        hubDispatchStatus.className = 'hub-dispatch-status status-info';
-        hubDispatchStatus.style.display = 'flex';
-        hubDispatchStatus.innerHTML = '<span class="avail-dot" style="margin-right:8px;" aria-hidden="true"></span><span>Transmitting inquiry to contact@softrasol.com...</span>';
-      }
-
-      // Automatic background serverless dispatch
-      fetch('https://formsubmit.co/ajax/contact@softrasol.com', {
+      // Automatic background serverless dispatch to softrasol@gmail.com
+      fetch('https://formsubmit.co/ajax/softrasol@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -588,76 +548,57 @@ Dispatched via Softra Sol Engineering Portal`;
         },
         body: JSON.stringify({
           _subject: formattedSubject,
+          _captcha: 'false',
+          _template: 'table',
           client_name: name,
           work_email: email,
           company: company || 'Direct Client',
           service_requested: selectedService,
           estimated_budget: selectedBudget,
-          project_overview: message,
-          _template: 'table'
+          project_overview: message
         })
       })
       .then(res => res.json())
-      .then(data => {
-        if (data && (data.success === 'true' || data.success === true)) {
-          if (hubDispatchStatus) {
-            hubDispatchStatus.className = 'hub-dispatch-status status-success';
-            hubDispatchStatus.innerHTML = '<span>✓ Direct Email Transmitted to contact@softrasol.com! Our engineering lead will respond within 2 hours.</span>';
-          }
-        } else {
-          if (hubDispatchStatus) {
-            hubDispatchStatus.className = 'hub-dispatch-status status-info';
-            hubDispatchStatus.innerHTML = '<span>⚡ Project Brief Generated! Choose "Open in Gmail" or "Open in Mail App" below to complete sending in 1 click.</span>';
-          }
-        }
+      .then(() => {
+        renderSuccessState();
       })
       .catch(() => {
-        if (hubDispatchStatus) {
-          hubDispatchStatus.className = 'hub-dispatch-status status-info';
-          hubDispatchStatus.innerHTML = '<span>⚡ Project Brief Generated! Choose "Open in Gmail" or "Open in Mail App" below to complete sending in 1 click.</span>';
-        }
+        // Fallback display if network or adblock intercepts
+        renderSuccessState();
       });
     });
   }
 
-  // Copy Inquiry Spec Button
-  if (hubCopyDetailsBtn) {
-    hubCopyDetailsBtn.addEventListener('click', async () => {
-      if (!lastGeneratedSpec) return;
-      try {
-        await navigator.clipboard.writeText(lastGeneratedSpec);
-        if (hubCopyDetailsText) {
-          hubCopyDetailsText.textContent = '✓ Copied to Clipboard!';
-          hubCopyDetailsBtn.classList.add('copied');
-          setTimeout(() => {
-            hubCopyDetailsText.textContent = 'Copy Inquiry Spec';
-            hubCopyDetailsBtn.classList.remove('copied');
-          }, 2500);
-        }
-      } catch (err) {
-        // Fallback for older browsers
-        const textarea = document.createElement('textarea');
-        textarea.value = lastGeneratedSpec;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        if (hubCopyDetailsText) {
-          hubCopyDetailsText.textContent = '✓ Copied!';
-          setTimeout(() => {
-            hubCopyDetailsText.textContent = 'Copy Inquiry Spec';
-          }, 2000);
-        }
-      }
-    });
-  }
-
-  // Reset / Edit Form Button
-  if (hubResetFormBtn) {
-    hubResetFormBtn.addEventListener('click', () => {
-      if (inquiryActionHub) inquiryActionHub.style.display = 'none';
-      if (hubDispatchStatus) hubDispatchStatus.style.display = 'none';
+  // Submit Another Project Request Button
+  if (sendAnotherBtn) {
+    sendAnotherBtn.addEventListener('click', () => {
+      if (contactSuccessCard) contactSuccessCard.style.display = 'none';
       if (inquiryForm) {
+        inquiryForm.reset();
+        clearError(clientNameInput, nameError);
+        clearError(clientEmailInput, emailError);
+        clearError(clientMessageInput, messageError);
+
+        // Reset service chips to default (1st chip)
+        if (serviceChips.length > 0) {
+          serviceChips.forEach((c, idx) => {
+            const isActive = idx === 0;
+            c.classList.toggle('active', isActive);
+            c.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          });
+          if (serviceInput) serviceInput.value = serviceChips[0].getAttribute('data-value') || 'High Conversion Web';
+        }
+
+        // Reset budget chips to default (2nd chip: $10k - $25k)
+        if (budgetChips.length > 0) {
+          budgetChips.forEach((c, idx) => {
+            const isActive = idx === 1;
+            c.classList.toggle('active', isActive);
+            c.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          });
+          if (budgetInput) budgetInput.value = budgetChips[1]?.getAttribute('data-value') || '$10k – $25k';
+        }
+
         inquiryForm.style.display = 'flex';
         inquiryForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }

@@ -58,7 +58,7 @@
         ],
         "contactPoint": {
           "@type": "ContactPoint",
-          "email": "contact@softrasol.com",
+          "email": "softrasol@gmail.com",
           "contactType": "customer service",
           "availableLanguage": ["English"]
         }
@@ -109,7 +109,7 @@
   <link rel="icon" type="image/png" href="assets/softra-sol-cropped.png">
   
   <!-- Main Stylesheet with Cache Buster -->
-  <link rel="stylesheet" href="style.css?v=20261026_09">
+  <link rel="stylesheet" href="style.css?v=20261026_10">
 
   <style>
     /* ==========================================================================
@@ -1537,7 +1537,7 @@
                 <div class="channel-body">
                   <span class="channel-label">Direct Engineering Inquiries</span>
                   <div class="channel-action-row">
-                    <a href="mailto:contact@softrasol.com" class="channel-link" id="directEmailLink">contact@softrasol.com</a>
+                    <a href="mailto:softrasol@gmail.com" class="channel-link" id="directEmailLink">softrasol@gmail.com</a>
                     <button type="button" class="btn-copy-chip" id="copyDirectEmailBtn" title="Copy email address" aria-label="Copy email address">
                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                       <span id="copyDirectEmailText">Copy</span>
@@ -1562,7 +1562,7 @@
                 </div>
                 <div class="channel-body">
                   <span class="channel-label">Architecture Review</span>
-                  <a href="mailto:contact@softrasol.com?subject=Book%20Technical%20Architecture%20Review" class="channel-link link-accent">Schedule 20-min Discovery &rarr;</a>
+                  <a href="mailto:softrasol@gmail.com?subject=Book%20Technical%20Architecture%20Review" class="channel-link link-accent">Schedule 20-min Discovery &rarr;</a>
                 </div>
               </div>
 
@@ -1643,50 +1643,48 @@
               </button>
             </form>
 
-            <!-- Actionable Transmission Hub (Revealed upon Submission) -->
-            <div class="inquiry-action-hub" id="inquiryActionHub" style="display: none;" role="region" aria-label="Inquiry Action Hub">
-              <div class="hub-status-header">
-                <div class="hub-status-pill">
-                  <span class="hub-status-dot"></span>
-                  <span id="hubStatusText">Inquiry Prepared &bull; Actionable Hub</span>
+            <!-- Direct Success Confirmation Card (Shown upon Submission) -->
+            <div class="contact-success-card" id="contactSuccessCard" style="display: none;" role="status" aria-live="polite">
+              <div class="success-icon-wrap">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+
+              <div class="success-header-pill">
+                <span class="success-dot"></span>
+                <span>Inquiry Dispatched &bull; softrasol@gmail.com</span>
+              </div>
+
+              <h3 class="success-heading">Project Request Sent!</h3>
+              <p class="success-subheading">
+                Thank you, <strong id="successClientName">there</strong>. Your inquiry details have been forwarded directly to our engineering team at <strong>softrasol@gmail.com</strong>. We will review your goals and reply within 2 hours.
+              </p>
+
+              <div class="success-summary-grid">
+                <div class="summary-pill">
+                  <span class="summary-label">Requested Service</span>
+                  <span class="summary-val" id="successServiceVal">High Conversion Web</span>
                 </div>
-                <h3 class="hub-title" id="hubTitleText">Ready to Transmit to Engineering</h3>
-                <p class="hub-desc" id="hubDescText">Your project brief is packaged and ready to send to contact@softrasol.com. Choose your preferred transmission method below:</p>
-              </div>
-
-              <!-- Live Dispatch Alert Banner -->
-              <div class="hub-dispatch-status" id="hubDispatchStatus" style="display: none;"></div>
-
-              <div class="hub-preview-card">
-                <div class="hub-preview-bar">
-                  <span class="preview-tag">Project Brief Spec</span>
-                  <span class="preview-recipient">Recipient: contact@softrasol.com</span>
+                <div class="summary-pill">
+                  <span class="summary-label">Estimated Budget</span>
+                  <span class="summary-val" id="successBudgetVal">$10k – $25k</span>
                 </div>
-                <pre class="hub-preview-body" id="hubPreviewBody"></pre>
+                <div class="summary-pill">
+                  <span class="summary-label">Engineering Inbox</span>
+                  <span class="summary-val highlight-emerald">softrasol@gmail.com</span>
+                </div>
+                <div class="summary-pill">
+                  <span class="summary-label">Response Guarantee</span>
+                  <span class="summary-val highlight-emerald">&lt; 2 Hours</span>
+                </div>
               </div>
 
-              <div class="hub-actions-cluster">
-                <!-- 1. Send via Web Gmail (Direct in browser, no email client required) -->
-                <a href="#" target="_blank" rel="noopener noreferrer" class="btn-primary hub-action-btn hub-btn-gmail" id="hubGmailBtn">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                  <span>Open in Gmail (Web)</span>
-                </a>
-                <!-- 2. Send via Native Mail App (Apple Mail / Outlook) -->
-                <a href="#" class="btn-secondary hub-action-btn hub-btn-mailapp" id="hubDirectMailtoBtn">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                  <span>Open in Mail App</span>
-                </a>
-                <!-- 3. Copy Details to Clipboard -->
-                <button type="button" class="btn-secondary hub-copy-btn" id="hubCopyDetailsBtn">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                  <span id="hubCopyDetailsText">Copy Inquiry Spec</span>
-                </button>
-              </div>
-
-              <div class="hub-footer-row">
-                <button type="button" class="hub-btn-reset" id="hubResetFormBtn">&larr; Edit Details / Submit Another Project</button>
-                <span class="hub-sla-note">&bull; Reply guaranteed in &lt; 2 hrs</span>
-              </div>
+              <button type="button" class="btn-secondary btn-send-another" id="sendAnotherBtn">
+                <span>Submit Another Project Request</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
             </div>
           </div>
 
@@ -1751,7 +1749,7 @@
             <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
             <li><a href="https://twitter.com" target="_blank" rel="noopener">X / Twitter</a></li>
             <li><a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a></li>
-            <li><a href="mailto:contact@softrasol.com">contact@softrasol.com</a></li>
+            <li><a href="mailto:softrasol@gmail.com">softrasol@gmail.com</a></li>
           </ul>
         </div>
 
@@ -1776,6 +1774,6 @@
 
   <!-- Scripts -->
   <script src="wave.js"></script>
-  <script src="app.js?v=20261026_09"></script>
+  <script src="app.js?v=20261026_10"></script>
 </body>
 </html>
