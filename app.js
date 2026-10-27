@@ -523,10 +523,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const formattedSubject = `[Project Inquiry] ${selectedService} — ${name}${company ? ' (' + company + ')' : ''}`;
 
       // Helper to display direct success card
-      const renderSuccessState = () => {
+      const renderSuccessState = (needsActivation = false) => {
         if (successClientName) successClientName.textContent = name;
         if (successServiceVal) successServiceVal.textContent = selectedService;
         if (successBudgetVal) successBudgetVal.textContent = selectedBudget;
+
+        const noticeBanner = document.getElementById('successNoticeBanner');
+        if (noticeBanner) {
+          if (needsActivation) {
+            noticeBanner.style.display = 'block';
+            noticeBanner.innerHTML = '⚡ <strong>One-time activation required:</strong> Please click <strong>"Activate Form"</strong> in the verification email FormSubmit just sent to <strong>softrasol@gmail.com</strong>. Once clicked, all future submissions arrive instantly!';
+          } else {
+            noticeBanner.style.display = 'none';
+          }
+        }
 
         if (inquiryForm) inquiryForm.style.display = 'none';
         if (contactSuccessCard) {
@@ -539,8 +549,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      // Automatic background serverless dispatch to softrasol@gmail.com
-      fetch('https://formsubmit.co/ajax/softrasol@gmail.com', {
+      // Background serverless dispatch to softrasol@gmail.com (via assigned secure token 99dce9c04913772162b7af2690e03229)
+      fetch('https://formsubmit.co/ajax/99dce9c04913772162b7af2690e03229', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -559,12 +569,13 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       })
       .then(res => res.json())
-      .then(() => {
-        renderSuccessState();
+      .then((data) => {
+        const needsActivation = data && data.message && data.message.includes('needs Activation');
+        renderSuccessState(needsActivation);
       })
       .catch(() => {
         // Fallback display if network or adblock intercepts
-        renderSuccessState();
+        renderSuccessState(false);
       });
     });
   }
